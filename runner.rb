@@ -54,7 +54,7 @@ class Runner
 
 	def process_target(source, target, includes, options)
 
-		command = "rsync -r -v --progress"
+		command = "rsync -r -v --progress -t"
 		command = command + " --delete" if options[:delete]
 		if includes
 			includes.each do |include|
