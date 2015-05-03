@@ -61,7 +61,9 @@ class Runner
 				command = command + " --include '#{include}'"
 			end
 
-			command = command + " --exclude '/*'"
+			command = command + " --include '*/'"
+			command = command + " --exclude '*'"
+			command = command + " --prune-empty-dirs"
 		end
 		command = command + " --size-only '#{source}' '#{target}'"
 		command = command + " --dry-run" unless options[:real]

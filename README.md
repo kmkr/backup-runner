@@ -19,8 +19,8 @@ assets:
     targets:
       - /backup/vids/
     includes:
-      - on_the_moon*
-      - in-the-sea*
+      - '*on_the_moon*'
+      - '*in-the-sea*'
 ```
 
 Run with `ruby backup-runner.rb`
