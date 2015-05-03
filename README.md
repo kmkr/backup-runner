@@ -16,6 +16,8 @@ assets:
     targets:
       - /backup/pics/
   - source: /media/vids/
+    excludes:
+      - '*foo*'
     targets:
       - /backup/vids/
     includes:

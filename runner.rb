@@ -9,6 +9,7 @@ class Runner
 			source = asset["source"]
 			targets = asset["targets"]
 			includes = asset["includes"]
+			excludes = asset["excludes"]
 
 			puts "======================================================="
 			puts "#{source}"
@@ -26,7 +27,7 @@ class Runner
 				end
 				mounts_found << target
 				check_space target
-				process_target source, target, includes, options
+				process_target source, target, includes, excludes, options
 			end
 		end
 
@@ -52,7 +53,7 @@ class Runner
 		end
 	end
 
-	def process_target(source, target, includes, options)
+	def process_target(source, target, includes, excludes, options)
 
 		command = "rsync -r -v --progress -t"
 		command = command + " --delete" if options[:delete]
@@ -63,6 +64,13 @@ class Runner
 
 			command = command + " --include '*/'"
 			command = command + " --exclude '*'"
+			command = command + " --prune-empty-dirs"
+		elsif excludes
+			excludes.each do |exclude|
+				command = command + " --exclude '#{exclude}'"
+			end
+
+			command = command + " --include '*'"
 			command = command + " --prune-empty-dirs"
 		end
 		command = command + " --size-only '#{source}' '#{target}'"
